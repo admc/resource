@@ -1,0 +1,108 @@
+<style>
+  .mdl-textfield {
+    width:99%;
+  }
+  .mdl-grid {
+    margin: 0px;
+    padding:0px;
+  }
+  .mdl-cell {
+    margin: 0px;
+    padding:0px;
+  }
+</style>
+
+<div class="container">
+  <form action="/user/create" method="post" id="registerForm" style="padding:20px">
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="min-width:380px">
+      <div class="mdl-card__title">
+        <img style="width:50px;" src="/images/logo_icon_medium_white.png">
+      </div>
+      <ul class="errorList" id="errors">
+        {{#if flash}}
+        {{#each flash}}
+          <li>{{this.message}}</li>
+        {{/each}}
+        {{/if}}
+      </ul>
+      <div class="mdl-card__supporting-text">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" name="username" autofocus>
+          <label class="mdl-textfield__label" for="username">Username</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" name="email">
+          <label class="mdl-textfield__label" for="username">Email</label>
+        </div>
+
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--7-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" name="firstname">
+              <label class="mdl-textfield__label" for="username">First Name</label>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--8-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" name="lastname">
+              <label class="mdl-textfield__label" for="username">Last Name</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="mdl-grid">
+         <div class="mdl-cell mdl-cell--7-col">
+           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="password" name="password">
+              <label class="mdl-textfield__label" for="password">Password</label>
+           </div>
+         </div>
+         <div class="mdl-cell mdl-cell--8-col">
+           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="password" name="confirm">
+              <label class="mdl-textfield__label" for="password">Confirm</label>
+           </div>
+         </div>
+        </div>
+
+      <div class="mdl-card__actions mdl-card--border">
+        <a href="/user/login" style="margin:10px;float:left;font-size:10px">I have an account.</a>
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="float:right" onclick="submitForm()">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+           Register
+          </button>
+        </a>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  var submitForm = function() {
+    var errors = document.getElementById("errors");
+    errors.innerHTML = "";
+
+    var firstname = registerForm.firstname.value;
+    var lastname = registerForm.lastname.value;
+    var email = registerForm.email.value;
+    var username = registerForm.username.value;
+
+    var password = registerForm.password.value;
+    var confirm = registerForm.confirm.value;
+    if (password != confirm) {
+      var error = document.createElement("li");
+      error.innerHTML = "Password and Confirm must match."
+      errors.appendChild(error);
+    }
+    else if (!firstname || !lastname || !email || !username) {
+      var error = document.createElement("li");
+      error.innerHTML = "All fields are required."
+      errors.appendChild(error);
+      
+    }
+    else {
+      registerForm.submit()
+    }
+    return false;
+  }
+</script>

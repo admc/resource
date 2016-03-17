@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wild</title>
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/mobile/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/mobile/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/mobile/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/mobile/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/mobile/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/mobile/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/mobile/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/mobile/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/mobile/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/mobile/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/mobile/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/mobile/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/mobile/favicon-16x16.png">
+    <link rel="manifest" href="/images/mobile/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/images/mobile/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href='/css/material-icons.css' rel='stylesheet' type='text/css' />
+    <link rel='stylesheet' href='/css/login.css' rel='stylesheet' type='text/css' />
+    <link rel='stylesheet' href='/css/material.css' rel='stylesheet' type='text/css'/>
+    <link href='/css/material.cyan-pink.min.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title"></span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation -->
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="http://wild.io/">Home</a>
+            <a class="mdl-navigation__link" href="http://wild.io/downloads">Downloads</a>
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title"></span>
+        <nav class="mdl-navigation" style="color:black">
+          <a class="mdl-navigation__link" href="http://wild.io/">Home</a>
+          <a class="mdl-navigation__link" href="http://wild.io/downloads">Downloads</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        {{{body}}}
+      </main>
+      <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__left-section">
+          <div class="mdl-logo">Wild © 2016</div>
+          <ul class="mdl-mini-footer__link-list">
+            <li><a href="/features">Features</a></li>
+            <li><a href="/privacy">Privacy & Terms</a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="/js/lib/jquery-2.2.0.min.js"></script>
+  <script src="/js/material.js"></script>
+</html>

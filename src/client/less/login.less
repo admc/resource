@@ -1,0 +1,57 @@
+/* html { 
+  background: url(/images/bg.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  margin-top: 4%;
+  min-height: 100%;
+  width:100%;
+
+  /* Firefox */
+  display:-moz-box;
+  -moz-box-pack:center;
+  -moz-box-align:center;
+
+  /* Safari and Chrome */
+  display:-webkit-box;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+
+  /* W3C */
+  display:box;
+  box-pack:center;
+  box-align:center;
+}
+
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent a.mdl-navigation__link,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: black;
+}
+
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 100px;
+  background: url('/images/bg/snow_fence.png') center / cover;
+}
+
+.errorList {
+  font-size:12px;
+  color:red;
+  padding:0px;
+  padding-right:4px;
+  margin:0px;
+  text-align:right;
+  height:15px;
+}
