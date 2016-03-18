@@ -16,7 +16,7 @@ export default class Header extends React.Component {
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">
            <img style={{height:"35"}}
-             src="/images/logo_icon_medium.png"/>
+             src="/images/white_r_boxy.png"/>
           </span>
           <div className="mdl-layout-spacer"></div>
           <nav className="mdl-navigation">

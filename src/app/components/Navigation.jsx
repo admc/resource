@@ -28,27 +28,30 @@ export default class Navigation extends React.Component {
         <nav className="mdl-navigation">
         <Paper zDepth={1} style={style}>
           <span style={{float:"left", fontSize:"16px"}}>Hi, <b>{this.state.firstname}</b></span>
-          <span style={{float:"right"}}><User size={40}/></span>
          </Paper>
           <a className="mdl-navigation__link" href="#/">
             <i className="material-icons">home</i>
             <span>Home</span>
           </a>
-          <a className="mdl-navigation__link" href="#/conversation">
-            <i className="material-icons">email</i>
-            <span className="mdl-badge" data-badge="4">Conversations</span>
+          <a className="mdl-navigation__link" href="#/projects">
+            <i className="material-icons">library_books</i>
+            <span className="mdl-badge">Projects</span>
           </a>
-          <a className="mdl-navigation__link" href="#/collection">
-            <i className="material-icons">collections</i>
-            Collections
+          <a className="mdl-navigation__link" href="#/people">
+            <i className="material-icons">face</i>
+            People 
           </a>
-          <a className="mdl-navigation__link" href="#/experience">
-            <i className="material-icons">photo_filter</i>
-            Experiences
+          <a className="mdl-navigation__link" href="#/attributes">
+            <i className="material-icons">all_inclusive</i>
+            Attributes
           </a>
-          <a className="mdl-navigation__link" href="#/checklists">
-            <i className="material-icons">beenhere</i>
-            Checklists
+          <a className="mdl-navigation__link" href="#/archives">
+            <i className="material-icons">archive</i>
+            Archives 
+          </a>
+          <a className="mdl-navigation__link" href="#/analytics">
+            <i className="material-icons">assessment</i>
+            Analytics 
           </a>
         </nav>
       </div>
