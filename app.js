@@ -12,7 +12,7 @@ var express = require('express')
 
 var rDBStore = new RDBStore({
   connectOptions: config
-  , table: 'session'
+  , table: 'Session'
 });
 
 //Routes

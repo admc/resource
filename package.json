@@ -34,6 +34,7 @@
     "react-tap-event-plugin": "^0.2.2",
     "rethinkdb": "^2.2.2",
     "serve-favicon": "^2.3.0",
+    "thinky": "^2.2.6",
     "underscore": "^1.8.3",
     "validate": "^3.0.1"
   },

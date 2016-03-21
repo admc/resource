@@ -1,2 +1,4 @@
 var config = require('../../config/database');
-module.exports = require('rethinkdbdash')(config);
+var thinky = require('thinky')(config)
+
+module.exports = thinky;
