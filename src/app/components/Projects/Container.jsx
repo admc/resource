@@ -12,22 +12,22 @@ export default class Container extends React.Component {
 
   _create = (e) => {
     e.preventDefault()
-    this.context.router.push('/collection/create')
+    this.context.router.push('/projects/create')
   };
 
   _list = (e) => {
     e.preventDefault()
-    this.context.router.push('/collection/list')
+    this.context.router.push('/projects/list')
   };
 
   render() {
     return (
       <div style={{marginTop:50, width:"100%"}}>
         <AppBar
-          title={<span style={{cursor:"pointer"}} onClick={this._list}>Collections</span>}
+          title={<span style={{cursor:"pointer"}} onClick={this._list}>Projects</span>}
           showMenuIconButton={false} 
           iconElementRight={
-            <FlatButton primary={true} label="New Collection" onClick={this._create} />
+            <FlatButton primary={true} label="New Project" onClick={this._create} />
           }
         /> 
         <div>

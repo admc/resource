@@ -6,8 +6,6 @@ var auth = require('connect-ensure-login').ensureLoggedIn('/user/login');
 //controllers
 var user = require('./controllers/user');
 var home = require('./controllers/home');
-var collection = require('./controllers/collection');
-var experience = require('./controllers/experience');
 
 //auth behavior
 var redirectObj = { 
@@ -30,13 +28,5 @@ router.get('/user/register', user.register);
 router.post('/user/create', user.create);
 router.get('/user/profile', auth, user.profile);
 router.get('/user/me', auth, user.me);
-
-router.get('/collection', auth, collection.all);
-router.post('/collection/create', auth, collection.create);
-router.get('/collection/:id', auth, collection.view);
-
-router.get('/experience', auth, experience.all);
-router.post('/experience/create', auth, experience.create);
-router.get('/experience/:id', auth, experience.view);
 
 module.exports = router;

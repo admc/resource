@@ -45,7 +45,7 @@ export default class List extends React.Component {
     if (this.state.collections.length == 0) {
       return (
         <div>
-          You need to <a href="#/collection/create">create some</a> collections!
+          You need to <a href="#/projects/create">create some</a>!
         </div>
       )
     }
