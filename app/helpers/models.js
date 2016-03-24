@@ -3,6 +3,14 @@
 var db = require('../helpers/db');
 var type = db.type;
 
+//Here so that thinky doesn't kill the Sessoin table
+//used by session management in app.js
+var Session = db.createModel("Session", {
+  id: type.string()
+  , session: type.string()
+  , expires: type.any()
+});
+
 var User = db.createModel("User", {
   id: type.string()
   , username: type.string().lowercase().alphanum().min(3).required()

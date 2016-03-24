@@ -4,14 +4,23 @@ import Snackbar from 'material-ui/lib/snackbar'
 import RaisedButton from 'material-ui/lib/raised-button'
 import FlatButton from 'material-ui/lib/flat-button'
 import styles from 'material-ui'
+import MenuItem from 'material-ui/lib/menus/menu-item'
 
-import {FormsyRadio, FormsyRadioGroup, FormsyText} from 'formsy-material-ui'
+import {FormsySelect, FormsyRadioGroup, FormsyText} from 'formsy-material-ui'
 
 import CollectionActions from '../../actions/CollectionActions'
 
 const errorMessages = {
   wordsError: "This field can't be empty."
 }
+
+const style = {
+  height: 100,
+  width: 100,
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+};
 
 var pStyle = {
   float:"left"
@@ -35,11 +44,10 @@ export default class Create extends React.Component {
     this.state = {
       canSubmit: false
       , autoHideDuration: 0
-      , snackMessage: 'Your collection was created.'
+      , snackMessage: 'Your project was created.'
       , isSnackOpen: false
     }
   }
-
 
   _change = (state) => {
     this.setState(state)
@@ -53,15 +61,16 @@ export default class Create extends React.Component {
     this.setState({ canSubmit: false })
   };
 
-  _submitForm = (collection) => {
-    CollectionActions.createCollection(collection)
-    this.refs.collectionForm.reset()
-    this._snackOpen()
+  _submitForm = (project) => {
+    console.log(project)
+    //CollectionActions.createCollection(collection)
+    //this.refs.projectForm.reset()
+    //this._snackOpen()
   };
 
   _snackAction = () => {
     //Ultimately redirect to new collection, go to list for now
-    this.context.router.push('/collection/list')
+    this.context.router.push('/projects')
   };
 
   _snackClose = () => {
@@ -110,17 +119,18 @@ export default class Create extends React.Component {
             value={currentYear}
             style={pStyle}
             floatingLabelText="Target Year" />
-         
-         <FormsyText
-            name='quarter'
-            validations='isExisty'
-            validationError={errorMessages.wordsError}
-            hintText="Slated for which quarter?"
-            value={currentQuarter}
-            style={pStyle}
-            floatingLabelText="Target Quarter" />
-         <br />
 
+         <FormsySelect
+           name='quarter'
+           style={pStyle}
+           required
+           floatingLabelText="Target Quarter">
+           <MenuItem value={'q1'} primaryText="Q1" />
+           <MenuItem value={'q2'} primaryText="Q2" />
+           <MenuItem value={'q3'} primaryText="Q3" />
+           <MenuItem value={'q4'} primaryText="Q4" />
+        </FormsySelect>
+ 
          <FormsyText
             fullWidth={true}
             name='description'
@@ -131,17 +141,33 @@ export default class Create extends React.Component {
             value=""
             rowsMax={3}
             floatingLabelText="Description" />
-         <br />
 
          <FormsyText
-            fullWidth={true}
-            name='epic'
+            name='lead'
             validations='isExisty'
             validationError={errorMessages.wordsError}
-            hintText="Please provide a link to the JIRA Epic"
+            hintText="Who is the engineering lead?"
             value=""
-            rowsMax={2}
-            floatingLabelText="Epic" />
+            style={{float:"left"}}
+            floatingLabelText="Engineering Lead" />
+
+         <FormsyText
+            name='pm'
+            validations='isExisty'
+            validationError={errorMessages.wordsError}
+            hintText="Who is the product manager?"
+            value=""
+            style={pStyle}
+            floatingLabelText="Product Manager" />
+
+         <FormsyText
+            name='stakeholders'
+            validations='isExisty'
+            validationError={errorMessages.wordsError}
+            hintText="List the stakeholders"
+            value=""
+            style={pStyle}
+            floatingLabelText="Stakeholders" />
          <br />
 
          <FormsyText
@@ -151,8 +177,17 @@ export default class Create extends React.Component {
             validationError={errorMessages.wordsError}
             hintText="Please provide a link to the product specification"
             value=""
-            rowsMax={2}
-            floatingLabelText="Specification" />
+            floatingLabelText="Product Specification" />
+         <br />
+
+         <FormsyText
+            fullWidth={true}
+            name='epic'
+            validations='isExisty'
+            validationError={errorMessages.wordsError}
+            hintText="Please provide a link to the JIRA Epic"
+            value=""
+            floatingLabelText="Jira Epic" />
          <br />
 
          <FormsyText
@@ -162,59 +197,16 @@ export default class Create extends React.Component {
             validationError={errorMessages.wordsError}
             hintText="Please provide a link to the engineering notes document"
             value=""
-            rowsMax={2}
-            floatingLabelText="Notes" />
-         <br />
-
-
-         <FormsyText
-            fullWidth={true}
-            name='lead'
-            validations='isExisty'
-            validationError={errorMessages.wordsError}
-            hintText="Who is the engineering lead on the project?"
-            value=""
-            rowsMax={2}
-            floatingLabelText="Engineering Lead" />
-         <br />
-
-         <FormsyText
-            fullWidth={true}
-            name='pm'
-            validations='isExisty'
-            validationError={errorMessages.wordsError}
-            hintText="Who is the product manager for the project?"
-            value=""
-            rowsMax={2}
-            floatingLabelText="Product Manager" />
-         <br />
-
-         <FormsyText
-            fullWidth={true}
-            name='stakeholders'
-            validations='isExisty'
-            validationError={errorMessages.wordsError}
-            hintText="List the non product/engineering stakeholders"
-            value=""
-            rowsMax={2}
-            floatingLabelText="Stakeholders" />
+            floatingLabelText="Eng Notes" />
          <br />
 
          <br />
          <RaisedButton
            primary={true}
            type="submit"
-           style={{textAlign:"center"}}
+           style={{float:"right", textAlign:"center"}}
            label="Create"
            disabled={!this.state.canSubmit} />
-
-         <RaisedButton
-           style={{float:"right", textAlign:"center"}}
-           secondary={true}
-           linkButton={true}
-           href="#/collection"
-           label="Done" />
-
         </Formsy.Form>
       </div>
     )
