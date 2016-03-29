@@ -62,27 +62,25 @@ models.Attribute.save([one, two, three]).then(function(attributes) {
     var obj = JSON.parse(JSON.stringify(user));
     obj.username += i;
     obj.email = "user"+i+"@gmail.com";
-    //obj.attributes = attributes;
     users.push(obj);
   };
 
   models.User.save(users).then(function(saved) {
-    console.log(saved)
     var newOrg = new models.Organization(org)
     newOrg.users = saved;
     newOrg.saveAll({users: true}).then(function(result) {
       models.User.filter({}).run().then(function(users) {
         _(users).forEach(function(user) { 
-          console.log(user.username);
           models.User.get(user.id).run().then(function(userObj) {
             userObj.attributes = attributes;
-            userObj.saveAll({attributes: true}).then(function(done) {
-              console.log(done);
+            userObj.projects = [new models.Project(project)]
+            userObj.saveAll({attributes: true, projects: true}).then(function(done) {
+              console.log(user.username);
             })
           })
-        });
-      });
-    });
+        })
+      })
+    })
   })
-});
+})
 

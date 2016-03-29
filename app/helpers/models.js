@@ -103,6 +103,8 @@ Project.hasAndBelongsToMany(Organization, "organizations", "id", "id");
 Update.hasAndBelongsToMany(Project, "projects", "id", "id");
 
 User.hasAndBelongsToMany(Organization, "organizations", "id", "id");
+Organization.hasAndBelongsToMany(User, "users", "id", "id");
+
 User.hasAndBelongsToMany(Project, "projects", "id", "id");
 User.hasAndBelongsToMany(Attribute, "attributes", "id", "id");
 
