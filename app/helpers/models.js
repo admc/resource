@@ -28,7 +28,7 @@ exports.User = User;
 
 var Attribute = db.createModel("Attribute", {
   id: type.string()
-  , name: type.string().lowercase().alphanum().min(3).required()
+  , name: type.string().required()
   , description: type.string().optional()
   , created: type.date().required()
 });
@@ -36,7 +36,7 @@ exports.Attribute = Attribute;
 
 var Organization = db.createModel("Organization", {
   id: type.string()
-  , name: type.string().lowercase().alphanum().min(3).required()
+  , name: type.string().min(3).required()
   , description: type.string().optional()
   , url: type.string().optional()
   , created: type.date().required()
@@ -47,7 +47,7 @@ exports.Organization = Organization;
 //how do integrate the concept of a checklist
 var Project = db.createModel("Project", {
   id: type.string()
-  , name: type.string().lowercase().alphanum().min(3).required()
+  , name: type.string().min(3).required()
   , description: type.string().optional()
   , epic: type.string().optional()
   , spec: type.string().optional()
@@ -56,12 +56,12 @@ var Project = db.createModel("Project", {
   , year: type.string().optional()
   , start: type.date().optional()
   , finish: type.date().optional()
-  , status: type.string().required()
+  , status: type.string().optional()
   , created: type.date().required()
   , admin: type.array().required()
   , lead: type.string().optional()
   , pm: type.string().optional()
-  , stakeholders: type.array().optional()
+  , stakeholders: type.any().optional()
 });
 exports.Project = Project;
 
@@ -104,6 +104,7 @@ Update.hasAndBelongsToMany(Project, "projects", "id", "id");
 
 User.hasAndBelongsToMany(Organization, "organizations", "id", "id");
 User.hasAndBelongsToMany(Project, "projects", "id", "id");
+User.hasAndBelongsToMany(Attribute, "attributes", "id", "id");
 
 Comment.hasAndBelongsToMany(Project, "projects", "id", "id");
 Comment.hasAndBelongsToMany(Update, "updates", "id", "id");

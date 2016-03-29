@@ -1,31 +1,30 @@
-var db = require('../helpers/db');
+var models = require('../helpers/models');
+var project = {};
 
-var collection = {};
-var table = "collection";
-
-collection.all = function(req, res) {
-  db.table(table).filter({username: req.user.username}).run()
-    .then(function(collections) {
-      res.json(collections);
-    })
+project.list = function(req, res) {
+  models.Project.filter({username: req.user.username}).run().then(function(projects) {
+    res.json(projects);
+  })
 };
 
-collection.create = function(req, res) {
-  var collection = req.body;
-  collection.username = req.user.username;
-  collection.created = Date.now();
-
-  db.table(table).insert(collection).run()
-    .then(function(result) {
-      res.json({id: result.generated_keys[0]});
-    })
+project.create = function(req, res) {
+  var p = new models.Project(req.body);
+  p.username = req.user.username;
+  p.admin = [req.user.username];
+  //p.stakeholders = req.body.stakeholders.split(",");
+  p.stakeholders = [];
+  p.created = Date.now();
+  p.save().then(function(result) {
+    res.json(result);
+  })
 };
 
-collection.view = function(req, res) {
-  db.table(table).get(req.params.id).run()
-    .then(function (collection) {
-      res.json(collection);
-    })
+project.view = function(req, res) {
+  console.log(req.params)
+  models.Project.get(req.params.id).run().then(function(result) {
+    console.log(result)
+    res.json(result);
+  })
 };
 
-module.exports = collection;
+module.exports = project;

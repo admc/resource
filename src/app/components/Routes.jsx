@@ -17,7 +17,7 @@ export default class Routes extends React.Component {
             <IndexRoute component={Projects.List}/>
             <Route path="/projects/list" component={Projects.List} />
             <Route path="/projects/create" component={Projects.Create} />
-            <Route path="/projects/:projectsId" component={Projects.View}/>
+            <Route path="/projects/:projectId" component={Projects.View}/>
           </Route>
 
           <Route path="*" component={Home}/>

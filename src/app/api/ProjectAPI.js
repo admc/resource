@@ -2,7 +2,7 @@ var ProjectAPI = {}
 
 ProjectAPI.fetch = function () {
   return new Promise(function (resolve, reject) {
-    $.get( "/project", function(result) {
+    $.get( "/project/list", function(result) {
       resolve(result);
     });
   });

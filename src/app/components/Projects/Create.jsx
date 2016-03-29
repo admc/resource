@@ -8,7 +8,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item'
 
 import {FormsySelect, FormsyRadioGroup, FormsyText} from 'formsy-material-ui'
 
-import CollectionActions from '../../actions/CollectionActions'
+import ProjectActions from '../../actions/ProjectActions'
 
 const errorMessages = {
   wordsError: "This field can't be empty."
@@ -63,9 +63,9 @@ export default class Create extends React.Component {
 
   _submitForm = (project) => {
     console.log(project)
-    //CollectionActions.createCollection(collection)
-    //this.refs.projectForm.reset()
-    //this._snackOpen()
+    ProjectActions.createProject(project)
+    this.refs.projectForm.reset()
+    this._snackOpen()
   };
 
   _snackAction = () => {

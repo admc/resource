@@ -7,28 +7,28 @@ import ActionGrade from 'material-ui/lib/svg-icons/action/grade'
 import RaisedButton from 'material-ui/lib/raised-button'
 import CircularProgress from 'material-ui/lib/circular-progress'
 
-import CollectionStore from '../../stores/CollectionStore'
-import CollectionActions from '../../actions/CollectionActions'
+import ProjectStore from '../../stores/ProjectStore'
+import ProjectActions from '../../actions/ProjectActions'
 
 const gridListStyle = {width: "100%", height: "100%", overflowY: 'auto', margin: 10};
 
 export default class List extends React.Component {
   constructor(props) {
     super(props)
-    this.state = CollectionStore.getState()
+    this.state = ProjectStore.getState()
   }
 
   componentDidMount() {
-    CollectionStore.listen(this._change)
-    CollectionActions.fetchCollections()
+    ProjectStore.listen(this._change)
+    ProjectActions.fetchProjects()
   }
 
   componentWillUnmount() {
-    CollectionStore.unlisten(this._change)
+    ProjectStore.unlisten(this._change)
   }
 
   _select = (id) => {
-    this.context.router.push('/collection/'+id)
+    this.context.router.push('/projects/'+id)
   };
 
   _change = (state) => {
@@ -42,7 +42,7 @@ export default class List extends React.Component {
       );
     }
 
-    if (this.state.collections.length == 0) {
+    if (this.state.projects.length == 0) {
       return (
         <div>
           You need to <a href="#/projects/create">create some</a>!
@@ -50,7 +50,7 @@ export default class List extends React.Component {
       )
     }
 
-    if (!this.state.collections || !this.state.collections.map) {
+    if (!this.state.projects || !this.state.projects.map) {
       return (
         <div>
           <CircularProgress mode="indeterminate" size={1.5}/>
@@ -66,12 +66,12 @@ export default class List extends React.Component {
           padding={5}
           style={gridListStyle}>
 
-          {this.state.collections.map(collection => {
+          {this.state.projects.map(project => {
             return (
               <GridTile
                 titlePosition="top"
-                title={<span style={{cursor:"pointer"}} onClick={this._select.bind(this, collection.id)}>{collection.name}</span>}
-                subtitle={<span>by <b>{collection.username}</b></span>}
+                title={<span style={{cursor:"pointer"}} onClick={this._select.bind(this, project.id)}>{project.name}</span>}
+                subtitle={<span>by <b>{project.username}</b></span>}
                 actionIcon={<IconButton></IconButton>}
                 >
               </GridTile>
