@@ -2,9 +2,11 @@ var models = require('../helpers/models');
 var project = {};
 
 project.list = function(req, res) {
-  models.Project.filter({username: req.user.username}).run().then(function(projects) {
-    res.json(projects);
-  })
+  models.Organization.get(req.user.organizations[0].id)
+    .getJoin({projects: true}).run()
+    .then(function(organization) {
+      res.json(organization.projects);
+    })
 };
 
 project.create = function(req, res) {

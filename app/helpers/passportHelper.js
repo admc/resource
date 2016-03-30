@@ -5,13 +5,15 @@ var passport = require('passport')
   ;
 
 passport.use(new LocalStrategy(function (username, password, done) {
-  models.User.filter({username: username}).run().then(function(user) {
-    console.log(user)
-    if (user.length == 0) { return done(null, false); }
-    if (!hash.compareHash(password, user[0].password)) {
+  models.User.filter({username: username}).run().then(function(users) {
+    if (users.length == 0) { return done(null, false); }
+    if (!hash.compareHash(password, users[0].password)) {
        return done(null, false);
     }
-    return done(null, user[0]);
+
+    models.User.get(users[0].id).getJoin({organizations: true}).run().then(function(user) {
+      return done(null, user);
+    })
   })
 }))
 
@@ -20,7 +22,8 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(id, cb) {
-  models.User.get(id).run().then(function(user) {
+
+  models.User.get(id).getJoin({organizations: true}).run().then(function(user) {
     cb(null, user);
   })
   .error(function(err) {

@@ -35,7 +35,8 @@ var project = {
   , admin: ["admc", "tester1"] 
   , lead: "thauber"
   , pm: "stratos"
-  , stakeholders: ["gaetano", "rylinton"] 
+  , stakeholders: ["gaetano", "rylinton"]
+  , username: "tester1"
 };
 
 
@@ -65,16 +66,17 @@ models.Attribute.save([one, two, three]).then(function(attributes) {
     users.push(obj);
   };
 
-  models.User.save(users).then(function(saved) {
+  models.User.save(users).then(function(savedUsers) {
     var newOrg = new models.Organization(org)
-    newOrg.users = saved;
-    newOrg.saveAll({users: true}).then(function(result) {
+    newOrg.users = savedUsers;
+    newOrg.projects = [new models.Project(project)]
+    newOrg.saveAll({users: true, projects: true}).then(function(savedOrg) {
       models.User.filter({}).run().then(function(users) {
         _(users).forEach(function(user) { 
           models.User.get(user.id).run().then(function(userObj) {
             userObj.attributes = attributes;
-            userObj.projects = [new models.Project(project)]
-            userObj.saveAll({attributes: true, projects: true}).then(function(done) {
+            userObj.organizations = [savedOrg];
+            userObj.saveAll({attributes: true, organizations: true}).then(function(done) {
               console.log(user.username);
             })
           })

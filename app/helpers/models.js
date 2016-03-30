@@ -62,6 +62,7 @@ var Project = db.createModel("Project", {
   , lead: type.string().optional()
   , pm: type.string().optional()
   , stakeholders: type.any().optional()
+  , username: type.string().required()
 });
 exports.Project = Project;
 
@@ -100,6 +101,7 @@ var Checklist = db.createModel("Checklist", {
 exports.Checklist = Checklist;
 
 Project.hasAndBelongsToMany(Organization, "organizations", "id", "id");
+Organization.hasAndBelongsToMany(Project, "projects", "id", "id");
 Update.hasAndBelongsToMany(Project, "projects", "id", "id");
 
 User.hasAndBelongsToMany(Organization, "organizations", "id", "id");
