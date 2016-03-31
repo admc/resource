@@ -3,8 +3,9 @@ var project = {};
 
 project.list = function(req, res) {
   models.Organization.get(req.user.organizations[0].id)
-    .getJoin({projects: true}).run()
+    .getJoin({projects: true, users: true}).run()
     .then(function(organization) {
+      console.log(organization)
       res.json(organization.projects);
     })
 };
@@ -22,11 +23,18 @@ project.create = function(req, res) {
 };
 
 project.view = function(req, res) {
-  console.log(req.params)
-  models.Project.get(req.params.id).run().then(function(result) {
-    console.log(result)
-    res.json(result);
-  })
+  models.Project.get(req.params.id)
+    .getJoin({
+      users: true
+    , updates: {
+        _apply: function(sequence) {
+          return sequence.orderBy('created')
+        }
+     }
+    }).run()
+    .then(function(project) {
+      res.json(project);
+    })
 };
 
 module.exports = project;

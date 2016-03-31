@@ -71,7 +71,7 @@ var Update = db.createModel("Update", {
   , subject: type.string().lowercase().alphanum().min(3).optional()
   , text: type.string().required()
   , created: type.date().required()
-  , user: type.string().required()
+  , username: type.string().required()
 });
 exports.Update = Update;
 
@@ -80,7 +80,7 @@ var Comment = db.createModel("Comment", {
   , subject: type.string().lowercase().alphanum().min(3).optional()
   , text: type.string().required()
   , created: type.date().required()
-  , user: type.string().required()
+  , username: type.string().required()
 });
 exports.Comment = Comment;
 
@@ -102,7 +102,9 @@ exports.Checklist = Checklist;
 
 Project.hasAndBelongsToMany(Organization, "organizations", "id", "id");
 Organization.hasAndBelongsToMany(Project, "projects", "id", "id");
+Project.hasAndBelongsToMany(User, "users", "id", "id");
 Update.hasAndBelongsToMany(Project, "projects", "id", "id");
+Project.hasAndBelongsToMany(Update, "updates", "id", "id");
 
 User.hasAndBelongsToMany(Organization, "organizations", "id", "id");
 Organization.hasAndBelongsToMany(User, "users", "id", "id");

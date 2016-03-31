@@ -7,6 +7,7 @@ var auth = require('connect-ensure-login').ensureLoggedIn('/user/login');
 var user = require('./controllers/user');
 var home = require('./controllers/home');
 var project = require('./controllers/project');
+var update = require('./controllers/update');
 
 //auth behavior
 var redirectObj = { 
@@ -33,5 +34,7 @@ router.get('/user/me', auth, user.me);
 router.post('/project/create', project.create);
 router.get('/project/list', project.list);
 router.get('/project/:id', project.view);
+
+router.post('/update/create', update.create);
 
 module.exports = router;

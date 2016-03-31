@@ -6,8 +6,7 @@ import Navigation from './components/Navigation.jsx'
 import Footer from './components/Footer.jsx'
 
 //Theme
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import ThemeDecorator from 'material-ui/lib/styles/theme-decorator';
+import getMuiTheme from 'material-ui/lib/styles/getMuiTheme'
 import MaterialTheme from './config/theme';
 
 var injectTapEventPlugin = require('react-tap-event-plugin');
@@ -21,7 +20,7 @@ class AppRoot extends React.Component {
 
   getChildContext() {
     return {
-      muiTheme: ThemeManager.getMuiTheme(MaterialTheme)
+      muiTheme: getMuiTheme(MaterialTheme)
     }
   }
 

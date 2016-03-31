@@ -57,8 +57,9 @@ var three = new models.Attribute({
   , created: Date.now()
 });
 
+//create potential user attributes
 models.Attribute.save([one, two, three]).then(function(attributes) {
-  var users = [];
+  var users = []; //array of users
   for (var i = 0; i < 10; i++) {
     var obj = JSON.parse(JSON.stringify(user));
     obj.username += i;
@@ -66,18 +67,26 @@ models.Attribute.save([one, two, three]).then(function(attributes) {
     users.push(obj);
   };
 
+  //save all those users to the db
   models.User.save(users).then(function(savedUsers) {
-    var newOrg = new models.Organization(org)
-    newOrg.users = savedUsers;
-    newOrg.projects = [new models.Project(project)]
-    newOrg.saveAll({users: true, projects: true}).then(function(savedOrg) {
-      models.User.filter({}).run().then(function(users) {
-        _(users).forEach(function(user) { 
-          models.User.get(user.id).run().then(function(userObj) {
-            userObj.attributes = attributes;
-            userObj.organizations = [savedOrg];
-            userObj.saveAll({attributes: true, organizations: true}).then(function(done) {
-              console.log(user.username);
+    // create a new project
+    var newProject = new models.Project(project);
+    newProject.users = savedUsers; //it has all the users as participants
+    newProject.saveAll({users: true}).then(function(savedProject) {
+      //create a new org, with all the users, and all the projects
+      var newOrg = new models.Organization(org)
+      newOrg.users = savedUsers;
+      newOrg.projects = [savedProject]
+      newOrg.saveAll({users: true, projects: true}).then(function(savedOrg) {
+        //give users all their attributes, and let them know the org they are in
+        models.User.filter({}).run().then(function(users) {
+          _(users).forEach(function(user) { 
+            models.User.get(user.id).run().then(function(userObj) {
+              userObj.attributes = attributes;
+              userObj.organizations = [savedOrg];
+              userObj.saveAll({attributes: true, organizations: true}).then(function(done) {
+                console.log(user.username);
+              })
             })
           })
         })
