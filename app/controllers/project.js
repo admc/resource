@@ -5,7 +5,6 @@ project.list = function(req, res) {
   models.Organization.get(req.user.organizations[0].id)
     .getJoin({projects: true, users: true}).run()
     .then(function(organization) {
-      console.log(organization)
       res.json(organization.projects);
     })
 };
@@ -13,7 +12,6 @@ project.list = function(req, res) {
 project.create = function(req, res) {
   var p = new models.Project(req.body);
   p.username = req.user.username;
-  p.admin = [req.user.username];
   //p.stakeholders = req.body.stakeholders.split(",");
   p.stakeholders = [];
   p.created = Date.now();

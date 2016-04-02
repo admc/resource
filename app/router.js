@@ -8,6 +8,7 @@ var user = require('./controllers/user');
 var home = require('./controllers/home');
 var project = require('./controllers/project');
 var update = require('./controllers/update');
+var organization = require('./controllers/organization');
 
 //auth behavior
 var redirectObj = { 
@@ -28,13 +29,19 @@ router.post('/user/login', passport.authenticate('local', redirectObj), user.log
 router.get('/user/logout', user.logout);
 router.get('/user/register', user.register);
 router.post('/user/create', user.create);
-router.get('/user/profile', auth, user.profile);
+
 router.get('/user/me', auth, user.me);
+router.get('/user/list', auth, user.list);
+router.get('/user/:id', auth, user.view);
 
 router.post('/project/create', project.create);
 router.get('/project/list', project.list);
 router.get('/project/:id', project.view);
 
 router.post('/update/create', update.create);
+
+//router.post('/organization/create', organization.create);
+//router.get('/organization/list', organization.list);
+router.get('/organization/:id', organization.view);
 
 module.exports = router;

@@ -40,7 +40,6 @@ var Organization = db.createModel("Organization", {
   , description: type.string().optional()
   , url: type.string().optional()
   , created: type.date().required()
-  , admin: type.array().required()
 });
 exports.Organization = Organization;
 
@@ -58,7 +57,6 @@ var Project = db.createModel("Project", {
   , finish: type.date().optional()
   , status: type.string().optional()
   , created: type.date().required()
-  , admin: type.array().required()
   , lead: type.string().optional()
   , pm: type.string().optional()
   , stakeholders: type.any().optional()

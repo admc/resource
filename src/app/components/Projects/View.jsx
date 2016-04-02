@@ -139,7 +139,7 @@ export default class View extends React.Component {
                       {this.state.project.updates.reverse().map(update => {
                         return (
                           <div>
-                            <Subheader><Time value={update.created} format="MMMM DD, YYYY -- hh:mm" /></Subheader>
+                            <Subheader><Time value={update.created} format="MMMM DD, YYYY -- hh:mm a" /></Subheader>
                             <ListItem
                               leftAvatar={<Avatar src="/images/avatar_placeholder.png" />}
                               primaryText="Project Update"

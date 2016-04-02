@@ -6,7 +6,13 @@ var org = {
   name: "Betable"
   , description: "Gambling reinvented"
   , url: "http://www.betable.com"
-  , admin: ["admc"]
+  , created: Date.now()
+};
+
+var orgOne = {
+  name: "Ninjas"
+  , description: "Meeting of the ninjas"
+  , url: "http://www.ninjameetings.com"
   , created: Date.now()
 };
 
@@ -32,7 +38,6 @@ var project = {
   , year: "2016" 
   , status: "Not Started" 
   , created: Date.now() 
-  , admin: ["admc", "tester1"] 
   , lead: "thauber"
   , pm: "stratos"
   , stakeholders: ["gaetano", "rylinton"]
@@ -78,14 +83,19 @@ models.Attribute.save([one, two, three]).then(function(attributes) {
       newOrg.users = savedUsers;
       newOrg.projects = [savedProject]
       newOrg.saveAll({users: true, projects: true}).then(function(savedOrg) {
-        //give users all their attributes, and let them know the org they are in
-        models.User.filter({}).run().then(function(users) {
-          _(users).forEach(function(user) { 
-            models.User.get(user.id).run().then(function(userObj) {
-              userObj.attributes = attributes;
-              userObj.organizations = [savedOrg];
-              userObj.saveAll({attributes: true, organizations: true}).then(function(done) {
-                console.log(user.username);
+        var newOrgOne = new models.Organization(orgOne)
+        newOrgOne.users = savedUsers;
+        newOrgOne.projects = [savedProject]
+        newOrgOne.saveAll({users: true, projects: true}).then(function(savedOrgOne) {
+          //give users all their attributes, and let them know the org they are in
+          models.User.filter({}).run().then(function(users) {
+            _(users).forEach(function(user) { 
+              models.User.get(user.id).run().then(function(userObj) {
+                userObj.attributes = attributes;
+                userObj.organizations = [savedOrg, savedOrgOne];
+                userObj.saveAll({attributes: true, organizations: true}).then(function(done) {
+                  console.log(user.username);
+                })
               })
             })
           })
