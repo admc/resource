@@ -10,68 +10,97 @@ import Card from 'material-ui/lib/card/card'
 import CardActions from 'material-ui/lib/card/card-actions'
 import CardHeader from 'material-ui/lib/card/card-header'
 import CardTitle from 'material-ui/lib/card/card-title';
+import CardMedia from 'material-ui/lib/card/card-media';
+import CardText from 'material-ui/lib/card/card-text';
+
 import FlatButton from 'material-ui/lib/flat-button'
-import {FormsyRadio, FormsyRadioGroup, FormsyText} from 'formsy-material-ui'
-import Snackbar from 'material-ui/lib/snackbar'
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
 
 import Gravatar from 'gravatar'
 import _ from 'underscore'
 
-export default class Profile extends React.Component {
+export default class View extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      image: '/images/avatar_placeholder.png'
-      , canSubmit: false
-      , autoHideDuration: 0
-      , snackMessage: 'Your data was saved.'
-      , isSnackOpen: false
+      user: {attributes: [], projects: [], organizations: []}
+      , image: '/images/avatar_placeholder.png'
     }
   }
 
-  //SHould be using state, with onclick handlers on the components to clear them out
-  // to make them typable, for now, using deprecated setValue, frustrating shit.
   componentDidMount() {
     var icon = this.refs.icon;
     $.get( "/user/"+this.props.params.userId, function(user) {
+      this.setState({user})
       var url = Gravatar.url(user.email, {}, true);
-      console.log(url)
       this.setState({image: url})
     }.bind(this))
   }
 
-  _enableSubmit = () => {
-    this.setState({ canSubmit: true })
-  };
- 
-  _disableSubmit = () => {
-    this.setState({ canSubmit: false })
-  };
-
-  _submitForm = (model) => {
-    this._snackOpen()
-  };
-
-  _snackClose = () => {
-    this.setState({ isSnackOpen: false })
-  };
-
-  _snackOpen = () => {
-    this.setState({ isSnackOpen: true })
+  _selectProject = (id) => {
+    this.context.router.push('/projects/'+id)
   };
 
   render() {
     return (
       <div style={{marginTop:50, width:"100%"}}>
-
-        <Card>
-          <CardHeader
-            avatar={<img src={this.state.image}/>} />
-          <CardTitle style={{margin:"10px"}} title={this.state.username} subtitle={this.state.email}/>
-        </Card>
-
+       <Card style={{margin:"10px"}}>
+        <CardTitle style={{float:"right"}}
+          title={<span style={{fontSize:"16px"}}><strong>{this.state.user.title}</strong></span>}
+          subtitle={<span>{this.state.user.department} :: {this.state.user.team}</span>}
+        />
+        <CardHeader
+          title={<span>{this.state.user.firstname} {this.state.user.lastname} ({this.state.user.username})</span>}
+          subtitle={<div><a href={"mailto:"+this.state.user.email}>{this.state.user.email}</a></div>}
+          avatar={this.state.image}
+        />
+        <CardActions>
+          <FlatButton label="Message" />
+          <FlatButton label="Follow" />
+        </CardActions>
+        <Divider />
+        <CardText>
+          <div>
+            <h4>Organizations ({this.state.user.organizations.length})</h4>
+             <List>
+              {this.state.user.organizations.map(org => {
+                return (
+                  <ListItem primaryText={org.name} leftIcon={<i className="material-icons">business</i>} />
+                )
+              })}
+            </List>
+          </div>
+          <div>
+            <h4>Attributes ({this.state.user.attributes.length})</h4>
+            <List>
+              {this.state.user.attributes.map(attribute => {
+                return (
+                  <ListItem primaryText={attribute.name} leftIcon={<i className="material-icons">loyalty</i>} />
+                )
+              })}
+            </List>
+          </div>
+          <div>
+            <h4>Projects ({this.state.user.projects.length})</h4>
+            <List>
+            {this.state.user.projects.map(project=> {
+              return (
+                <ListItem
+                  onClick={this._selectProject.bind(this, project.id)}
+                  primaryText={project.name} leftIcon={<i className="material-icons">description</i>} />
+              )
+            })}
+            </List>
+          </div>
+        </CardText>
+      </Card>
       </div>
     )
   }
+}
+
+View.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }

@@ -53,10 +53,12 @@ user.create =  function(req, res) {
 };
 
 user.view = function(req, res) {
-  //will probably want to add a get for the profile infos.
-  models.User.get(req.params.id).run().then(function(user) {
-    res.json(user);
-  })
+  models.User.get(req.params.id)
+    .getJoin({attributes: true, projects: true, organizations: true}).run()
+    .then(function(user) {
+      console.log(user)
+      res.json(user);
+    })
 };
 
 user.me = function(req, res) {

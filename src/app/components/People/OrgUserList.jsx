@@ -25,6 +25,10 @@ export default class OrgUserList extends React.Component {
     }.bind(this))
   }
 
+  _select = (id) => {
+    this.context.router.push('/people/'+id)
+  };
+
   render() {
     return (
       <div>
@@ -34,16 +38,18 @@ export default class OrgUserList extends React.Component {
               <div>
                 <Subheader>{user.usernamename}</Subheader>
                 <ListItem
+                  onClick={this._select.bind(this, user.id)}
                   leftAvatar={<Avatar src="/images/avatar_placeholder.png" />}
-                  primaryText={user.username}
+                  primaryText={<span>{user.firstname} {user.lastname} ({user.username})</span>}
                   secondaryText={
                     <p>
-                      {user.firstname} {user.lastname}<br />
                       <span style={{color: darkBlack}}>{user.email}</span><br />
                       Since <Time value={user.created} format="MMMM DD, YYYY" />
                     </p>
                   }
-                  secondaryTextLines={2} />
+                  secondaryTextLines={2}>
+                  <div style={{float:"right"}}>{user.department.toUpperCase()} <br />{user.team} team</div>
+                  </ListItem>
 
                 <Divider inset={true} />
               </div>

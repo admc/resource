@@ -53,7 +53,7 @@ export default class List extends React.Component {
         {this.state.organizations.map(organization => {
           return (
             <div>
-              <h4>{organization.name}</h4>
+              <h4>{organization.name} Organization</h4>
               <OrgUserList organizationId={organization.id} />
             </div>
           )
