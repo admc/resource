@@ -3,6 +3,7 @@ import { hashHistory, Router, Route, Link, IndexRoute, Redirect } from 'react-ro
 import Home from './Home.jsx'
 import Projects from './Projects'
 import People from './People'
+import Organization from './Organization'
  
 export default class Routes extends React.Component {
   render() {
@@ -23,6 +24,12 @@ export default class Routes extends React.Component {
             <IndexRoute component={People.List}/>
             <Route path="/people/list" component={People.List} />
             <Route path="/people/:userId" component={People.View}/>
+          </Route>
+
+          <Route path="/organizations" component={Organization.Container}>
+            <IndexRoute component={Organization.List}/>
+            <Route path="/organizations/list" component={Organization.List} />
+            <Route path="/organizations/:organizationId" component={Organization.View}/>
           </Route>
 
           <Route path="*" component={Home}/>

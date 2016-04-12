@@ -37,6 +37,7 @@ router.get('/user/:id', auth, user.view);
 router.post('/project/create', project.create);
 router.get('/project/list', project.list);
 router.get('/project/:id', project.view);
+router.get('/project/user/:id', project.user);
 
 router.post('/update/create', update.create);
 

@@ -35,4 +35,17 @@ project.view = function(req, res) {
     })
 };
 
+project.user = function(req, res) {
+  models.User.get(req.params.id)
+    .getJoin({
+      projects: true
+      , users: true
+      , organizations: true
+    }).run()
+    .then(function(user) {
+      console.log(user)
+      res.json(user.projects);
+    })
+};
+
 module.exports = project;

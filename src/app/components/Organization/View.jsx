@@ -18,23 +18,21 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 
 import Gravatar from 'gravatar'
+import _ from 'underscore'
 
 export default class View extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      user: {attributes: [], projects: [], organizations: []}
-      , image: '/images/avatar_placeholder.png'
+      organization: {users: [], projects: []}
     }
   }
 
   componentDidMount() {
     var icon = this.refs.icon;
-    $.get( "/user/"+this.props.params.userId, function(user) {
-      this.setState({user})
-      var url = Gravatar.url(user.email, {}, true);
-      this.setState({image: url})
+    $.get( "/organization/"+this.props.params.organizationId, function(organization) {
+      this.setState({organization})
     }.bind(this))
   }
 
@@ -42,8 +40,8 @@ export default class View extends React.Component {
     this.context.router.push('/projects/'+id)
   };
 
-  _selectOrganization = (id) => {
-    this.context.router.push('/organizations/'+id)
+  _selectUser = (id) => {
+    this.context.router.push('/people/'+id)
   };
 
   render() {
@@ -51,13 +49,12 @@ export default class View extends React.Component {
       <div style={{marginTop:50, width:"100%"}}>
        <Card style={{margin:"10px"}}>
         <CardTitle style={{float:"right"}}
-          title={<span style={{fontSize:"16px"}}><strong>{this.state.user.title}</strong></span>}
-          subtitle={<span>{this.state.user.department} :: {this.state.user.team}</span>}
+          title={<span style={{fontSize:"16px"}}>{this.state.organization.created}</span>}
+          subtitle={<span>{this.state.organization.url}</span>}
         />
         <CardHeader
-          title={<span>{this.state.user.firstname} {this.state.user.lastname} ({this.state.user.username})</span>}
-          subtitle={<div><a href={"mailto:"+this.state.user.email}>{this.state.user.email}</a></div>}
-          avatar={this.state.image}
+          title={<h4>{this.state.organization.name}</h4>}
+          subtitle={<div>{this.state.organization.description}</div>}
         />
         <CardActions>
           <FlatButton label="Message" />
@@ -66,31 +63,21 @@ export default class View extends React.Component {
         <Divider />
         <CardText>
           <div>
-            <h4>Organizations ({this.state.user.organizations.length})</h4>
-             <List>
-              {this.state.user.organizations.map(organization => {
+            <h4>Users ({this.state.organization.users.length})</h4>
+            <List>
+              {this.state.organization.users.map(user => {
                 return (
                   <ListItem
-                    onClick={this._selectOrganization.bind(this, organization.id)}
-                    primaryText={organization.name} leftIcon={<i className="material-icons">business</i>} />
+                    onClick={this._selectUser.bind(this, user.id)}
+                    primaryText={user.username} leftIcon={<i className="material-icons">person</i>} />
                 )
               })}
             </List>
           </div>
           <div>
-            <h4>Attributes ({this.state.user.attributes.length})</h4>
+            <h4>Projects ({this.state.organization.projects.length})</h4>
             <List>
-              {this.state.user.attributes.map(attribute => {
-                return (
-                  <ListItem primaryText={attribute.name} leftIcon={<i className="material-icons">loyalty</i>} />
-                )
-              })}
-            </List>
-          </div>
-          <div>
-            <h4>Projects ({this.state.user.projects.length})</h4>
-            <List>
-            {this.state.user.projects.map(project=> {
+            {this.state.organization.projects.map(project=> {
               return (
                 <ListItem
                   onClick={this._selectProject.bind(this, project.id)}

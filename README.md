@@ -1,18 +1,17 @@
 # README #
 
-This is the app repository for the wild.io app server (user experience after login).
+Play app I'm calling resource to test out some tech.
 
 ### Setup ###
 
 * Clone
 * npm install
-* setup postgres (the .app works great)
-* create a development database: 'create database development;'
-* npm install -g sequelize-cli 
-* sequelize db:migrate
-* sequelize db:seed
+* install and run rethinkdb
+* create 'development' db
+* configure config/database.js
+* run db/dummy.js
 * gulp dev
-* localhost:3000 - admin:testing
+* localhost:3000, tester1:tester1
 
 ### Contribution guidelines ###
 
