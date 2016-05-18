@@ -1,6 +1,5 @@
 import React from 'react'
-import List from 'material-ui/lib/lists/list'
-import ListItem from 'material-ui/lib/lists/list-item'
+import {List, ListItem} from 'material-ui/List'
 import  _ from 'lodash'
  
 export default class Home extends React.Component {

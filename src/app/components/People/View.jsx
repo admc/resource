@@ -1,21 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Divider from 'material-ui/lib/divider'
-import Paper from 'material-ui/lib/paper'
-import TextField from 'material-ui/lib/text-field'
-import AppBar from 'material-ui/lib/app-bar'
-import RaisedButton from 'material-ui/lib/raised-button'
-import Card from 'material-ui/lib/card/card'
-import CardActions from 'material-ui/lib/card/card-actions'
-import CardHeader from 'material-ui/lib/card/card-header'
-import CardTitle from 'material-ui/lib/card/card-title';
-import CardMedia from 'material-ui/lib/card/card-media';
-import CardText from 'material-ui/lib/card/card-text';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import AppBar from 'material-ui/AppBar';
+import RaisedButton from 'material-ui/RaisedButton';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
-import FlatButton from 'material-ui/lib/flat-button'
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
+import FlatButton from 'material-ui/FlatButton';
+import List from 'material-ui/List';;
+import ListItem from 'material-ui/List';;
 
 import Gravatar from 'gravatar'
 

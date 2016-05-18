@@ -1,10 +1,10 @@
 import React from 'react'
 
-import Avatar from 'material-ui/lib/avatar'
-import Badge from 'material-ui/lib/badge'
-import Popover from 'material-ui/lib/popover/popover'
-import Menu from 'material-ui/lib/menus/menu'
-import MenuItem from 'material-ui/lib/menus/menu-item'
+import Avatar from 'material-ui/Avatar'
+import Badge from 'material-ui/Badge'
+import Popover from 'material-ui/Popover'
+import Menu from 'material-ui/Menu'
+import MenuItem from 'material-ui/MenuItem'
 
 import Gravatar from 'gravatar'
 

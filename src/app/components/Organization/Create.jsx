@@ -1,10 +1,10 @@
 import React from 'react'
 
-import Snackbar from 'material-ui/lib/snackbar'
-import RaisedButton from 'material-ui/lib/raised-button'
-import FlatButton from 'material-ui/lib/flat-button'
+import Snackbar from 'material-ui/Snackbar';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import styles from 'material-ui'
-import MenuItem from 'material-ui/lib/menus/menu-item'
+import MenuItem from 'material-ui/MenuItem';
 
 import {FormsySelect, FormsyRadioGroup, FormsyText} from 'formsy-material-ui'
 

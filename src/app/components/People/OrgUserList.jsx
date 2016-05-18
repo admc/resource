@@ -1,12 +1,11 @@
 import React from 'react'
 
-import Avatar from 'material-ui/lib/avatar'
+import Avatar from 'material-ui/Avatar';
 import Time from 'react-time'
-import List from 'material-ui/lib/lists/list'
-import ListItem from 'material-ui/lib/lists/list-item'
-import Divider from 'material-ui/lib/divider'
-import {grey400, darkBlack, lightBlack} from 'material-ui/lib/styles/colors'
-import Subheader from 'material-ui/lib/Subheader'
+import List from 'material-ui/List';
+import ListItem from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 
 
 import Gravatar from 'gravatar'
@@ -43,7 +42,7 @@ export default class OrgUserList extends React.Component {
                   primaryText={<span>{user.firstname} {user.lastname} ({user.username})</span>}
                   secondaryText={
                     <p>
-                      <span style={{color: darkBlack}}>{user.email}</span><br />
+                      <span style={{color: "black"}}>{user.email}</span><br />
                       Since <Time value={user.created} format="MMMM DD, YYYY" />
                     </p>
                   }

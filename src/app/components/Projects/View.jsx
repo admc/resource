@@ -2,25 +2,18 @@ import React from 'react'
 import _ from 'lodash'
 import { Link } from 'react-router'
 import {FormsyText} from 'formsy-material-ui'
-import RaisedButton from 'material-ui/lib/raised-button'
-import Tabs from 'material-ui/lib/tabs/tabs'
-import Tab from 'material-ui/lib/tabs/tab'
-import Paper from 'material-ui/lib/paper'
-import Avatar from 'material-ui/lib/avatar'
+import RaisedButton from 'material-ui/RaisedButton';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import Paper from 'material-ui/Paper';
+import Avatar from 'material-ui/Avatar';
 import Time from 'react-time'
-import List from 'material-ui/lib/lists/list'
-import ListItem from 'material-ui/lib/lists/list-item'
-import Divider from 'material-ui/lib/divider'
-import Subheader from 'material-ui/lib/Subheader'
-import {grey400, darkBlack, lightBlack} from 'material-ui/lib/styles/colors'
-import Card from 'material-ui/lib/card/card'
-import CardActions from 'material-ui/lib/card/card-actions'
-import CardHeader from 'material-ui/lib/card/card-header'
-import CardTitle from 'material-ui/lib/card/card-title';
-import CardMedia from 'material-ui/lib/card/card-media';
-import CardText from 'material-ui/lib/card/card-text';
-import FlatButton from 'material-ui/lib/flat-button'
-import FontIcon from 'material-ui/lib/font-icon';
+import List from 'material-ui/List';
+import ListItem from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
 
 import ProjectStore from '../../stores/ProjectStore'
 import ProjectActions from '../../actions/ProjectActions'
@@ -142,7 +135,7 @@ export default class View extends React.Component {
                                 primaryText="Project Update"
                                 secondaryText={
                                   <p>
-                                    <span style={{color: darkBlack}}>{update.username}</span> -- &nbsp;
+                                    <span style={{color: "black"}}>{update.username}</span> -- &nbsp;
                                     {update.text} 
                                   </p>
                                 }

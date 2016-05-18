@@ -1,12 +1,10 @@
 import React from 'react'
 
-import GridList from 'material-ui/lib/grid-list/grid-list'
-import GridTile from 'material-ui/lib/grid-list/grid-tile'
-import IconButton from 'material-ui/lib/icon-button'
-import ActionGrade from 'material-ui/lib/svg-icons/action/grade'
-import RaisedButton from 'material-ui/lib/raised-button'
-import CircularProgress from 'material-ui/lib/circular-progress'
-import Subheader from 'material-ui/lib/Subheader'
+import {GridList, GridTile} from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
+import Subheader from 'material-ui/Subheader';
 import _ from 'lodash'
 
 import OrgUserList from './OrgUserList.jsx'

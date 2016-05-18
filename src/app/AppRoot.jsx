@@ -5,9 +5,11 @@ import Header from './components/Header.jsx'
 import Navigation from './components/Navigation.jsx'
 import Footer from './components/Footer.jsx'
 
-//Theme
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme'
-import MaterialTheme from './config/theme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+const darkMuiTheme = getMuiTheme(darkBaseTheme);
 
 var injectTapEventPlugin = require('react-tap-event-plugin');
 injectTapEventPlugin();
@@ -18,14 +20,9 @@ class AppRoot extends React.Component {
     super(props)
   }
 
-  getChildContext() {
-    return {
-      muiTheme: getMuiTheme(MaterialTheme)
-    }
-  }
-
   render() {
     return (
+      <MuiThemeProvider muiTheme={darkMuiTheme}>
       <div>
         <div className="demo-layout-transparent mdl-layout mdl-js-layout">
           <Header/>
@@ -41,12 +38,9 @@ class AppRoot extends React.Component {
           </main>
         </div>
       </div>
+      </MuiThemeProvider>
     )
   }
-}
-
-AppRoot.childContextTypes = {
-  muiTheme: React.PropTypes.object
 }
 
 ReactDOM.render(<Routes AppRoot={AppRoot} />, document.getElementById('app-root'))
